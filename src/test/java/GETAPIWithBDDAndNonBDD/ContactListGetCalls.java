@@ -40,7 +40,9 @@ public class ContactListGetCalls {
 	
 	String userId = js.getString("_id");
 	System.out.println("userId is " + userId);
-
+	
+	String firstName=js.getString("firstName");
+	System.out.println("firstName " +firstName);
 	}
 	
 	
