@@ -43,6 +43,9 @@ public class ContactListGetCalls {
 	
 	String firstName=js.getString("firstName");
 	System.out.println("firstName " +firstName);
+	
+	String lastName=js.getString("lastName");
+	System.out.println("lastName " +lastName);
 	}
 	
 	
