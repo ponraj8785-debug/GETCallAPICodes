@@ -1,8 +1,12 @@
 package GETAPINonBDD;
 
+import java.util.Iterator;
+import java.util.List;
+
 import org.testng.annotations.Test;
 
 import io.restassured.RestAssured;
+import io.restassured.http.Header;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
@@ -26,5 +30,41 @@ public class GetContactAPIList {
 		
 		response.prettyPrint();
 	}
+	
+	
+	@Test
+	public void getReqRestNonBDD() {
+		
+	RestAssured.baseURI="https://gorest.in/";
+		
+	RequestSpecification request=	RestAssured.given();
+	                  request.headers("Authorization","Ponraj");
+	Response response= request.get("/public/v2/users/");
+	                  System.out.println(response.prettyPrint() +" " +response.statusCode() + " " + response.statusLine());
+		
+	}
 
-}
+	@Test
+	public void getReqRestHeadersAssertionNonBDD() {
+		
+		RestAssured.baseURI="https://gorest.in/";
+		RequestSpecification request=	RestAssured.given();
+		          request.headers("Authorization","Ponraj");
+		Response response= request.get("/public/v2/users/");
+		
+		
+		//List Down the headers
+		
+	List<Header>headers=response.headers().asList();
+	System.out.println("Total number of header size is "+headers.size());
+	for(Header e : headers) {
+	   String headerName=	e.getName();
+	   String headerValue= e.getValue();
+	   System.out.println(headerName +" : " +headerValue);
+	}
+		
+		
+	}
+	}
+	
+
