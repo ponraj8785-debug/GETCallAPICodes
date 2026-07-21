@@ -41,6 +41,12 @@ public class ContactListGetCalls {
 	String userId = js.getString("_id");
 	System.out.println("userId is " + userId);
 	
+	List<Object> ids=js.getList("_id");
+	for(Object list:ids) {
+		System.out.println("list of id's : "+list);
+		Assert.assertNotNull(list);
+	}
+	
 	String firstName=js.getString("firstName");
 	System.out.println("firstName " +firstName);
 	
