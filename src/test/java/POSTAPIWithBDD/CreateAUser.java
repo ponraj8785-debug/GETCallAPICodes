@@ -20,7 +20,7 @@ public class CreateAUser {
 		.body("{\r\n"
 				+ "    \"name\": \"Ethel_Strosin26\",\r\n"
 				+ "    \"gender\": \"male\",\r\n"
-				+ "    \"email\": \"apiIssac.Davisss@gmail.com\",\r\n"
+				+ "    \"email\": \"apiIssac.Daviss@gmail.com\",\r\n"
 				+ "    \"status\": \"active\"\r\n"
 				+ "}")
 		.when()
