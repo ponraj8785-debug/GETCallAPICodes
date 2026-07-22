@@ -9,10 +9,16 @@ import static io.restassured.RestAssured.*;
 
 public class CreateAUser {
 	
+	public String getRandomEmailId() {
+		return "apiautomation"+System.currentTimeMillis()+"@opencart.com";
+	}
+	
 	@Test
 	public void CreateUser() {
 		
 		RestAssured.baseURI="https://gorest.co.in/";
+		String emailId= getRandomEmailId();
+		
 		
 		given().log().all()
 		.contentType(ContentType.JSON)
@@ -20,15 +26,15 @@ public class CreateAUser {
 		.body("{\r\n"
 				+ "    \"name\": \"Ethel_Strosin26\",\r\n"
 				+ "    \"gender\": \"male\",\r\n"
-				+ "    \"email\": \"apiIssac.Daviss@gmail.com\",\r\n"
+				+ "    \"email\": \""+emailId+"\",\r\n"
 				+ "    \"status\": \"active\"\r\n"
 				+ "}")
 		.when()
 		.post("public/v2/users")
 		.then().log().all()
 		.assertThat()
-		.statusCode(201);
-		
+		.statusCode(201);	
 	}
-
+	
+	
 }
