@@ -29,23 +29,17 @@ public class CreateContactList {
 		
 		RestAssured.baseURI="https://thinking-tester-contact-list.herokuapp.com";
 		String emailId= getRandomEmailId();
-		String firstName=getfirstName();
-		String lastName=getLastName();
 	
 		//Convert the JSON File Content to String
 		
 		String rawFile=new String(Files.readAllBytes(Paths.get(".\\src\\test\\resources\\JSON\\contact.json")));
 	
-		String updateFirstName=rawFile.replace("{{firstname}}", firstName);
-		String updateLastName=rawFile.replace("{{lastname}}", lastName);
 		String updatedFile=rawFile.replace("{{email}}", emailId);
 		
 		
 		given().log().all()
 		.contentType(ContentType.JSON)
 		.header("Authorization","Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTIxMGY1ZjgxNGZjMTAwMTU2YzRkMWMiLCJpYXQiOjE3ODQ3MDk1ODR9.uDJjo9Oszf3eqjtUFTOpyNJMA85PKvK0sXSgRyMlXR4")
-	    .body(updateFirstName)
-	    .body(updateLastName)
 	    .body(updatedFile)
 	    
 	    
