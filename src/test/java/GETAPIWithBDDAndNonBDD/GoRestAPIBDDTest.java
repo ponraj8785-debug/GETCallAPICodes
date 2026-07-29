@@ -30,7 +30,7 @@ public class GoRestAPIBDDTest {
 		given().log().all()
 		     .header("Authorization","Bearer c9debfcd908f8b4e46428181b1301810c2e79439bfdc0c0c47b9b089e8cdfcbb")
 		            .when()
-		                .get("/public/v2/users/1008")
+		                .get("/public/v2/users/1007")
 	                      .then().log().all()
 		                        .assertThat()
 		                             .statusCode(200)
