@@ -1,6 +1,6 @@
 {
-    "firstName": "{{firstname}}",
-    "lastName": "{{lastname}}",
+    "firstName": "Ponraj",
+    "lastName": "Natarajan",
     "email":"{{email}}"
   
 }

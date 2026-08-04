@@ -78,7 +78,7 @@ public class GoRestAPIQueryParamsTest {
 		RestAssured.baseURI = "https://gorest.in/";
 
 		HashMap<String, String> query = new HashMap<String, String>();
-		query.put("page", "2");
+		query.put("page", "3");
 
 		HashMap<String, String> path = new HashMap<String, String>();
 		path.put("versions", "v2");

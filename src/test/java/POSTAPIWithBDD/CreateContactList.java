@@ -17,12 +17,6 @@ public class CreateContactList {
 	public String getRandomEmailId() {
 		return "Ponraj"+System.currentTimeMillis()+"@opencart.com";
 	}
-	public String getfirstName() {
-		return "Ponraj"+System.currentTimeMillis();
-	}
-	public String getLastName() {
-		return "Nat"+System.currentTimeMillis();
-	}
 	
 	@Test
 	public void CreateUserWithJSONEmailReplacementTest() throws IOException {
