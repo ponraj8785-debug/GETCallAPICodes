@@ -39,7 +39,7 @@ public class POSTAPIWithDifferentBodyTest {
 				+ "alert(\"This is a dummy alert!\");";
 		
 		given().log().all()
-		 .contentType("application/javascript")
+		 .contentType("application/javascript;charset=utf-8")
 		 .body(payload)
 		 .when()
 		 .post("/post")
@@ -55,10 +55,10 @@ public class POSTAPIWithDifferentBodyTest {
 		
 		RestAssured.baseURI="https://www.postman-echo.com/";
 		String payload="{\r\n"
-				+ "  \"id\": 101,\r\n"
+				+ "  \"id\": 102,\r\n"
 				+ "  \"firstName\": \"John\",\r\n"
 				+ "  \"lastName\": \"Doe\",\r\n"
-				+ "  \"email\": \"johndoe@example.com\",\r\n"
+				+ "  \"email\": \"johndo@example.com\",\r\n"
 				+ "  \"age\": 28,\r\n"
 				+ "  \"isActive\": true,\r\n"
 				+ "  \"roles\": [\"User\", \"Admin\"],\r\n"
@@ -70,7 +70,7 @@ public class POSTAPIWithDifferentBodyTest {
 				+ "}";
 		
 		given().log().all()
-		 .contentType("application/javascript")
+		 .contentType(ContentType.JSON)
 		 .body(payload)
 		 .when()
 		 .post("/post")
@@ -80,6 +80,46 @@ public class POSTAPIWithDifferentBodyTest {
 		
 	}
 	
+	@Test
+	public void createBodyWithHTMLTest() {
+		
+		
+		RestAssured.baseURI="https://www.postman-echo.com/";
+		String payload="<h1>Welcome to My Website</h1>";
+		
+		given().log().all()
+		 .contentType(ContentType.HTML)
+		 .body(payload)
+		 .when()
+		 .post("/post")
+		 .then().log().all()
+		 .assertThat()
+		 .statusCode(200);
+		
+	}
+	
+	@Test
+	public void createBodyWithXMLTest() {
+		
+		
+		RestAssured.baseURI="https://www.postman-echo.com/";
+		String payload="<dependency>\r\n"
+				+ "    <groupId>io.rest-assured</groupId>\r\n"
+				+ "    <artifactId>rest-assured</artifactId>\r\n"
+				+ "    <version>5.5.6</version>\r\n"
+				+ "    <scope>test</scope>\r\n"
+				+ "</dependency>";
+		
+		given().log().all()
+		 .contentType(ContentType.XML)
+		 .body(payload)
+		 .when()
+		 .post("/post")
+		 .then().log().all()
+		 .assertThat()
+		 .statusCode(200);
+		
+	}
 	
 
 }
