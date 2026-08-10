@@ -26,5 +26,29 @@ public class POSTAPIWithDifferentBodyTest {
 		 .statusCode(200);
 		
 	}
+	
+	@Test
+	public void createBodyWithJavaScriptTest() {
+		
+		
+		RestAssured.baseURI="https://www.postman-echo.com/";
+		String payload="// Simple console log test\r\n"
+				+ "console.log(\"Hello, World! JavaScript is working.\");\r\n"
+				+ "\r\n"
+				+ "// Simple popup alert test\r\n"
+				+ "alert(\"This is a dummy alert!\");";
+		
+		given().log().all()
+		 .contentType("application/javascript")
+		 .body(payload)
+		 .when()
+		 .post("/post")
+		 .then().log().all()
+		 .assertThat()
+		 .statusCode(200);
+		
+	}
+	
+	
 
 }
