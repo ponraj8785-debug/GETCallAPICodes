@@ -7,6 +7,8 @@ import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.*;
 
+import java.io.File;
+
 public class POSTAPIWithDifferentBodyTest {
 	
 	@Test
@@ -121,5 +123,23 @@ public class POSTAPIWithDifferentBodyTest {
 		
 	}
 	
-
+	@Test
+	public void createBodyWithMultiPartTest() {
+		
+		
+		RestAssured.baseURI="https://www.postman-echo.com/";
+		
+		
+		given().log().all()
+		 .contentType(ContentType.MULTIPART)
+		 .multiPart("name", "Ponraj")
+		 .multiPart("resume",new File("C:\\Users\\Ponraj Natarajan\\OneDrive\\Desktop\\6Yrs_Exp_QA.docx"))
+		 .when()
+		 .post("/post")
+		 .then().log().all()
+		 .assertThat()
+		 .statusCode(200);
+		
+	}
+	
 }
