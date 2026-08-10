@@ -49,6 +49,37 @@ public class POSTAPIWithDifferentBodyTest {
 		
 	}
 	
+	@Test
+	public void createBodyWithJSONTest() {
+		
+		
+		RestAssured.baseURI="https://www.postman-echo.com/";
+		String payload="{\r\n"
+				+ "  \"id\": 101,\r\n"
+				+ "  \"firstName\": \"John\",\r\n"
+				+ "  \"lastName\": \"Doe\",\r\n"
+				+ "  \"email\": \"johndoe@example.com\",\r\n"
+				+ "  \"age\": 28,\r\n"
+				+ "  \"isActive\": true,\r\n"
+				+ "  \"roles\": [\"User\", \"Admin\"],\r\n"
+				+ "  \"address\": {\r\n"
+				+ "    \"street\": \"123 Main Street\",\r\n"
+				+ "    \"city\": \"New York\",\r\n"
+				+ "    \"zipcode\": \"10001\"\r\n"
+				+ "  }\r\n"
+				+ "}";
+		
+		given().log().all()
+		 .contentType("application/javascript")
+		 .body(payload)
+		 .when()
+		 .post("/post")
+		 .then().log().all()
+		 .assertThat()
+		 .statusCode(200);
+		
+	}
+	
 	
 
 }
