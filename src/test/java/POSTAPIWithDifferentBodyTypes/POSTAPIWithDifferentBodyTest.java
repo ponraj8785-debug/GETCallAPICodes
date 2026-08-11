@@ -32,8 +32,8 @@ public class POSTAPIWithDifferentBodyTest {
 	@Test
 	public void createBodyWithJavaScriptTest() {
 		
-		
 		RestAssured.baseURI="https://www.postman-echo.com/";
+		
 		String payload="// Simple console log test\r\n"
 				+ "console.log(\"Hello, World! JavaScript is working.\");\r\n"
 				+ "\r\n"
@@ -53,7 +53,6 @@ public class POSTAPIWithDifferentBodyTest {
 	
 	@Test
 	public void createBodyWithJSONTest() {
-		
 		
 		RestAssured.baseURI="https://www.postman-echo.com/";
 		String payload="{\r\n"
@@ -103,8 +102,8 @@ public class POSTAPIWithDifferentBodyTest {
 	@Test
 	public void createBodyWithXMLTest() {
 		
-		
 		RestAssured.baseURI="https://www.postman-echo.com/";
+		
 		String payload="<dependency>\r\n"
 				+ "    <groupId>io.rest-assured</groupId>\r\n"
 				+ "    <artifactId>rest-assured</artifactId>\r\n"
@@ -126,14 +125,13 @@ public class POSTAPIWithDifferentBodyTest {
 	@Test
 	public void createBodyWithMultiPartTest() {
 		
-		
 		RestAssured.baseURI="https://www.postman-echo.com/";
-		
-		
+			
 		given().log().all()
 		 .contentType(ContentType.MULTIPART)
 		 .multiPart("name", "Ponraj")
 		 .multiPart("resume",new File("C:\\Users\\Ponraj Natarajan\\OneDrive\\Desktop\\6Yrs_Exp_QA.docx"))
+		 .multiPart("picture", new File("C:\\Users\\Ponraj Natarajan\\OneDrive\\Desktop\\Collection.png"))
 		 .when()
 		 .post("/post")
 		 .then().log().all()
@@ -142,4 +140,70 @@ public class POSTAPIWithDifferentBodyTest {
 		
 	}
 	
+
+	@Test
+	public void createBodyWithSinglePDFTest() {
+		
+		RestAssured.baseURI="https://www.postman-echo.com/";
+			
+		given().log().all()
+		 .contentType("application/pdf;charset=utf-8")
+		 .body(new File("C:\\Users\\Ponraj Natarajan\\OneDrive\\Desktop\\dummy-pdf.pdf"))
+		 .when()
+		 .post("/post")
+		 .then().log().all()
+		 .assertThat()
+		 .statusCode(200);
+		
+	}
+	
+	
+	@Test
+	public void createBodyWithCSVTest() {
+		
+		RestAssured.baseURI="https://www.postman-echo.com/";
+			
+		given().log().all()
+		 .contentType("text/csv")
+		 .body(new File("C:\\Users\\Ponraj Natarajan\\OneDrive\\Desktop\\CSVTestData.csv.csv"))
+		 .when()
+		 .post("/post")
+		 .then().log().all()
+		 .assertThat()
+		 .statusCode(200);
+		
+	}
+	
+	@Test
+	public void createBodyWithXLSXTest() {
+		
+		RestAssured.baseURI="https://www.postman-echo.com/";
+			
+		given().log().all()
+		 .contentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+		 .body(new File("C:\\Users\\Ponraj Natarajan\\OneDrive\\Desktop\\Credentials.xlsx"))
+		 .when()
+		 .post("/post")
+		 .then().log().all()
+		 .assertThat()
+		 .statusCode(200);
+		
+	}
+	
+	
+	@Test
+	public void createBodyWithDOCXTest() {
+		
+		RestAssured.baseURI="https://www.postman-echo.com/";
+			
+		given().log().all()
+		 .contentType("application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+		 .body(new File("C:\\Users\\Ponraj Natarajan\\OneDrive\\Desktop\\xpath.docx"))
+		 .when()
+		 .post("/post")
+		 .then().log().all()
+		 .assertThat()
+		 .statusCode(200);
+		
+	}
 }
