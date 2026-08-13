@@ -1,4 +1,4 @@
-package CreateUserPOJOTest;
+package UpdateUserPOJOTest;
 
 import org.testng.annotations.Test;
 
@@ -7,7 +7,7 @@ import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
-public class CreateUserUsingPOJOTest {
+public class UpdateUserUsingPOJOTest {
 
 	public String getRandomEmailId() {
 		return "apiautomation" + System.currentTimeMillis() + "@opencart.com";
@@ -56,7 +56,42 @@ public class CreateUserUsingPOJOTest {
 				.body("email", equalTo(emailId))
 				.body("status", equalTo(user.getStatus()))
 				.body("gender", equalTo(user.getGender()));
-
+		
+		 System.out.println("----------3.PUT CALL---------------");
+		 
+		 user.setName("Ponraj Natarajan");
+		 user.setStatus("inactive");
+		 
+	//Step 3 :: update the user by the same userid
+		 
+		 given().log().all()
+			.header("Authorization", "Bearer c9debfcd908f8b4e46428181b1301810c2e79439bfdc0c0c47b9b089e8cdfcbb")
+			.contentType(ContentType.JSON)
+			.body(user)//auto-serialization =  POJO(Java object  -> JSON using jackson lib
+		.when()
+			.put("/public/v2/users/" + userID)
+			.then().log().all()
+			   .assertThat()
+				.statusCode(200)
+				 .and()
+					.body("id", equalTo(userID))
+					.body("name", equalTo(user.getName()))
+					.body("status", equalTo(user.getStatus()));
+		 
+		 System.out.println("----------4.GET CALL---------------");
+		 
+		 given().log().all()
+			.header("Authorization", "Bearer c9debfcd908f8b4e46428181b1301810c2e79439bfdc0c0c47b9b089e8cdfcbb")
+			.when()
+			.get("/public/v2/users/" + userID)
+			.then().log().all()
+			   .assertThat()
+				.statusCode(200)
+				 .and()
+					.body("id", equalTo(userID))
+					.body("name", equalTo(user.getName()))
+					.body("status", equalTo(user.getStatus()));
+		 
 	}
 
 }
