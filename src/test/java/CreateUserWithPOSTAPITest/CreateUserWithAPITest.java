@@ -29,7 +29,9 @@ public class CreateUserWithAPITest {
 
 		String rawFile = new String(Files.readAllBytes(Paths.get(".\\src\\test\\resources\\JSON\\user.json")));
 		String updatedFile = rawFile.replace("{{email}}", emailId);
-
+		
+		System.out.println("----------POST CALL METHOD---------------");
+		
 		int userID = given().log().all().contentType(ContentType.JSON)
 				.header("Authorization", "Bearer c9debfcd908f8b4e46428181b1301810c2e79439bfdc0c0c47b9b089e8cdfcbb")
 				.body(updatedFile)
@@ -46,13 +48,16 @@ public class CreateUserWithAPITest {
 
 		given().log().all().header("Authorization", "Bearer c9debfcd908f8b4e46428181b1301810c2e79439bfdc0c0c47b9b089e8cdfcbb")
 				.when().get("/public/v2/users/" + userID)
-				.then()
+				.then().log().all()
 				.assertThat()
 				.statusCode(200)
 				.and()
 				.body("id", equalTo(userID))
 				.body("name", equalTo("Ethel_Strosin26"))
 				.body("email", equalTo(emailId));
+		
+		
+		
 
 	}
 }
