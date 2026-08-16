@@ -38,7 +38,11 @@ public class CreateUserWithAPITest {
 
 				.when().post("public/v2/users")
 
-				.then().log().all().assertThat().statusCode(201).extract().path("id");
+				.then().log().all()
+				.assertThat()
+				.statusCode(201)
+				.extract()
+				.path("id");
 
 		System.out.println("User Id is " + userID);
 		
@@ -55,9 +59,6 @@ public class CreateUserWithAPITest {
 				.body("id", equalTo(userID))
 				.body("name", equalTo("Ethel_Strosin26"))
 				.body("email", equalTo(emailId));
-		
-		
-		
-
+	
 	}
 }
