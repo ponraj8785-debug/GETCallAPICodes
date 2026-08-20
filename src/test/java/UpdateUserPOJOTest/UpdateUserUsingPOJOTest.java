@@ -59,8 +59,8 @@ public class UpdateUserUsingPOJOTest {
 		
 		 System.out.println("----------3.PUT CALL---------------");
 		 
-		 user.setName("Ponraj Natarajan");
-		 user.setStatus("inactive");
+		 user.setName("Ponraj Dhivagar");
+		 user.setStatus("active");
 		 
 	//Step 3 :: update the user by the same userid
 		 
