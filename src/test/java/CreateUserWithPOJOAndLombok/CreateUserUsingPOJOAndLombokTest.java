@@ -1,15 +1,16 @@
-package UpdateUserPOJOTest;
-
-import org.testng.annotations.Test;
-
-import CreateUserPOJOTest.User;
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
+package CreateUserWithPOJOAndLombok;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
-public class UpdateUserUsingPOJOTest {
 
+import org.testng.annotations.Test;
+
+import CreateUserPOJOLombokUsingBuilerPattern.UserLombok;
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+
+public class CreateUserUsingPOJOAndLombokTest {
+	
 	public String getRandomEmailId() {
 		return "apiautomation" + System.currentTimeMillis() + "@opencart.com";
 	}
@@ -22,7 +23,7 @@ public class UpdateUserUsingPOJOTest {
 	// Step 1 :: Create a user
 		
 		//Create a object
-		User user=new User("Ponraj", emailId, "male", "active");
+		UserLombok user=new UserLombok("Ponraj Nattu", emailId, "male", "active");
 		
 	System.out.println("----------1.POST CALL---------------");
 		
@@ -57,44 +58,8 @@ public class UpdateUserUsingPOJOTest {
 				.body("email", equalTo(emailId))
 				.body("status", equalTo(user.getStatus()))
 				.body("gender", equalTo(user.getGender()));
-		
-		 System.out.println("----------3.PUT CALL---------------");
-		 
-		 user.setName("Ponraj Dhiva");
-		 user.setStatus("active");
-		 
-	//Step 3 :: update the user by the same userid
-		 
-		 given().log().all()
-			.header("Authorization", "Bearer c9debfcd908f8b4e46428181b1301810c2e79439bfdc0c0c47b9b089e8cdfcbb")
-			.contentType(ContentType.JSON)
-			.body(user)//auto-serialization =  POJO(Java object  -> JSON using jackson lib
-		.when()
-			.put("/public/v2/users/" + userID)
-			.then().log().all()
-			   .assertThat()
-				.statusCode(200)
-				 .and()
-					.body("id", equalTo(userID))
-					.body("name", equalTo(user.getName()))
-					.body("status", equalTo(user.getStatus()));
-		 
-		 System.out.println("----------4.GET CALL---------------");
-		 
-		 //Step 4 :: Get user by the same user id
-		 
-		 given().log().all()
-			.header("Authorization", "Bearer c9debfcd908f8b4e46428181b1301810c2e79439bfdc0c0c47b9b089e8cdfcbb")
-			.when()
-			.get("/public/v2/users/" + userID)
-			.then().log().all()
-			   .assertThat()
-				.statusCode(200)
-				 .and()
-					.body("id", equalTo(userID))
-					.body("name", equalTo(user.getName()))
-					.body("status", equalTo(user.getStatus()));
-		 
+
 	}
+
 
 }
