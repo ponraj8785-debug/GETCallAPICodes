@@ -1,4 +1,4 @@
-package CreateUserPOJOTest;
+package CreateContactListPOJOTest;
 
 public class ContactList {
 

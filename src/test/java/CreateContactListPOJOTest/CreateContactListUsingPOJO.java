@@ -1,4 +1,4 @@
-package CreateUserPOJOTest;
+package CreateContactListPOJOTest;
 
 import static io.restassured.RestAssured.given;
 
