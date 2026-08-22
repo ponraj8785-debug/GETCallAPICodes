@@ -51,7 +51,8 @@ public class CreateUserUsingPOJOLombokBuilderTest {
 
 		given().log().all()
 				.header("Authorization", "Bearer c9debfcd908f8b4e46428181b1301810c2e79439bfdc0c0c47b9b089e8cdfcbb")
-				.when().get("/public/v2/users/" + userID)
+				.when()
+				.get("/public/v2/users/" + userID)
 				.then().log().all()
 				 .assertThat()
 				  .statusCode(200)
