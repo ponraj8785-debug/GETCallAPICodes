@@ -19,6 +19,8 @@ public class CreatePETAPITest {
 	@Test
 	public void createPetAPITest() {
 		
+		System.out.println("----------1.POST CALL---------------");
+		
 		RestAssured.baseURI="https://petstore.swagger.io";
 		
 		//Create the object f the pet class
@@ -48,52 +50,5 @@ public class CreatePETAPITest {
 		
 	}
 
-	
-	@Test
-	public void createPetAPITestUsingBuilderPattern() {
-		
-	RestAssured.baseURI="https://petstore.swagger.io";
-		
-	Pet.Category category= new Pet.Category.CategoryBuilder()
-		.id(1)
-		.name("dog")
-		.build();
-		
-	List<String>photoURLs=  Arrays.asList
-			("https://www.photo123.com","https://www.photo123.com","https://www.photo123.com");
-	
-    Pet.Tag tag1=new Pet.Tag.TagBuilder()
-	    .id(101)
-	    .name("dogs")
-	    .build();
-    Pet.Tag tag2=new Pet.Tag.TagBuilder()
-    	.id(102)
-    	.name("dogers")
-    	.build();
-    
-    List<Tag>tags= Arrays.asList(tag1,tag2);
-    
-    Pet pet=new Pet.PetBuilder()
-    		.id(1)
-    		.name("Rogers")
-    		.status("Available")
-    		.photoUrls(photoURLs)
-    		.tag(tags)
-    		.category(category)
-    		.build();
-    
-
-	given().log().all()
-	.contentType(ContentType.JSON)
-	.body(pet)
-	.when()
-	.post("/v2/pet")
-	.then()
-	.log().all()
-    .assertThat()
-      .statusCode(200);
-	
-    
-	}
 }
 	
