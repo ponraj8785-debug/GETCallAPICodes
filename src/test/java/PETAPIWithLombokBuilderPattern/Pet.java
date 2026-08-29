@@ -45,7 +45,7 @@ public class Pet {
 	
 	
 	private List<String>photoUrls; //List of arrays
-	private List<Tag>tag;
+	private List<Tag>tags;
 	private Category category;
 	
 	//1st inner class

@@ -45,7 +45,7 @@ public class CreateAndGetPetAPIUsingBuilderPattern {
     		.name("Rogers")
     		.status("Available")
     		.photoUrls(photoURLs)
-    		.tag(tags)
+    		.tags(tags)
     		.category(category)
     		.build();
     
