@@ -77,6 +77,8 @@ public class CreateAndGetPetAPIUsingBuilderPattern {
              .log().all()
                .assertThat()
                  .statusCode(200);
+	 
+	 
 	}
 
 }

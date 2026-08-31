@@ -1,6 +1,7 @@
 package PETAPIWithLombokBuilderPattern;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 
 import java.util.Arrays;
 import java.util.List;
@@ -52,30 +53,42 @@ public class AssertTheResponsePETAPITest {
 		Assert.assertEquals(js.getString("category.name"), category.getName());
 
 		Assert.assertEquals(js.getList("photoUrls"), pet.getPhotoUrls());
-		
-		//Eitehr single assertion or iteration way to validate
+
+		// Eitehr single assertion or iteration way to validate
 
 		/*
 		 * Assert.assertEquals(js.getInt("tags[0].id"), pet.getTags().get(0).getId());
 		 * Assert.assertEquals(js.getInt("tags[1].id"), pet.getTags().get(1).getId());
 		 * Assert.assertEquals(js.getInt("tags[2].id"), pet.getTags().get(2).getId());
 		 * Assert.assertEquals(js.getInt("tags[3].id"), pet.getTags().get(3).getId());
-		 */		
-		
+		 */
+
 		for (int i = 0; i < tags.size(); i++) {
 			Assert.assertEquals(js.getInt("tags[" + i + "].id"), pet.getTags().get(i).getId());
 			Assert.assertEquals(js.getString("tags[" + i + "].name"), pet.getTags().get(i).getName());
-	}
+		}
 		
+		   System.out.println("----------2.GET CALL---------------");
 
-		System.out.println("----------2.UPDATE CALL---------------");
-		pet.setId(1000);
-		pet.setName("Country Dog");
-		pet.setStatus("UNavailable");
-		
-		
-		
+		    //Step 2 :: Get user by the same user id
+		   RestAssured.baseURI = "https://petstore.swagger.io";
+		   
+		given().log().all()
+				.contentType(ContentType.JSON)
+				.body(pet)
+				.when()
+				.get("/v2/pet/" + pet.getId())
+				.then().log().all()
+				   .assertThat()
+					.statusCode(200);
+
+	    
+	    
+	    
+	    
+	    
+	    
+
 	}
-	
-	
+
 }
