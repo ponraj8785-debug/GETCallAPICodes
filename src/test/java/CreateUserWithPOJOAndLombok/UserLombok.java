@@ -18,4 +18,5 @@ public class UserLombok {
 	String email;
 	String gender;
 	String status;
+	
 }

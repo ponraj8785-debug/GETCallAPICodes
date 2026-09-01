@@ -27,7 +27,7 @@ public class CreateUserUsingPOJOAndLombokTest {
 		
 	System.out.println("----------1.POST CALL---------------");
 		
-	int userID=	given().log().all()
+	int userID =	given().log().all()
 		.contentType(ContentType.JSON)
 		.header("Authorization", "Bearer c9debfcd908f8b4e46428181b1301810c2e79439bfdc0c0c47b9b089e8cdfcbb")
 		.body(user)//auto-serialization =  POJO(Java object  -> JSON using jackson lib
